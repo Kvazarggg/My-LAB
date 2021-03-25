@@ -1,0 +1,91 @@
+//ВАРИАНТ 3
+//Базовый Уровень: Введите массив символов из 12 элементов.Замените каждый символ-цифру на символ '!'.
+//Средний Уровень: Дан массив символов содержащий текст. Определить длину содержащейся в нем максимальной серии символов, отличных от букв.
+/*Сложный Уровень: Введите массив символов из 23 элементов. Определите, является ли он палиндромом (симметричным с точностью до пробелов) или нет.
+                   Например, А РОЗА УПАЛА НА ЛАПУ АЗОРА - палиндром. (Предполагается, что все буквы строки - прописные)*/
+
+#include <iostream>
+    
+using namespace std;
+
+void BasicLevel()
+{
+    char s[12];
+    cout << "Enter 12 symbols:\n";
+
+    for (int i = 0; i < sizeof(s); i++)
+    {
+        cin >> s[i];
+    }
+    cout << "Array after change: " << endl;
+    for (int i = 0; i < sizeof(s); i++)
+    {
+        if (isdigit(s[i])) s[i] = '!';
+        cout << s[i] << " ";
+    }
+    cout << "\n";
+}
+
+void AverageLevel()
+{
+    int symbol = 0, max_series = 0;
+    char string[] = "s!!mn****l";
+    cout << string << endl;
+    for (int i = 0; i < strlen(string); i++)
+    {
+        if (isalpha(string[i]))
+        {
+            symbol = 0;
+        }
+        else
+        {
+            symbol++;
+            if (max_series < symbol)
+            {
+                max_series = symbol;
+            }
+        }
+    }
+    cout << "Length of the maximum character series: " << max_series << endl;
+}
+
+void HighLevel()
+{
+    char s[23] = "RACE FAST SAFE CAR";
+
+    cout << s << endl;
+
+    for (int i = 0; i < strlen(s); i++)
+    {
+        if (isspace(s[i]))
+        {
+            for (int j = i; j < strlen(s); j++)
+            {
+                s[j] = s[j + 1];
+            }
+        }
+    }
+
+    bool check = true;
+    for (int i = 0; i < strlen(s) / 2; i++)
+    {
+        if (s[i] != s[strlen(s) - 1 - i])
+        {
+            check = false;
+            break;
+        }
+    }
+
+    cout << endl;
+    if (check == true)
+        cout << "Palindrome";
+    else
+        cout << "Not a palindrome";
+}
+
+int main()
+{
+    BasicLevel();
+    AverageLevel();
+    HighLevel();
+}
