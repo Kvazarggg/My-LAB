@@ -1,0 +1,82 @@
+//ВАРИАНТ 3
+//Базовый Уровень: В заданной строке вместо первого символа поставить пробел, а вместо последнего - точку.
+//Средний Уровень: В заданной строке заменить каждую русскую букву символом '*'.
+//Сложный Уровень: Заданы две строки. Построить новую строку, состоящую из символов, которые входят в первую строку, но не входят во вторую.
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void BasicLevel()
+{
+	string s = "124gergwewr1**";
+	cout << s << endl;
+	s[0] = ' ';
+	s[(s.length()) - 1] = '.';
+	cout << "String after change:" << endl;
+	cout << s << endl;
+	cout << "\n\n";
+}
+
+void AverageLevel()
+{
+	string str;
+	cout << "Enter string:" << endl;
+	getline(cin, str);
+	//русские буквы лежат в интервале от -128 до -81 и от -32 до -15 
+
+	for (int i = 0; i < str.size(); i++)
+	{
+		if (((str[i] >= -128) && (str[i] <= -81)) || ((str[i] >= -32) && (str[i] <= -15)))
+		{
+			str[i] = '*';
+		}
+	}
+	cout << endl;
+	cout << "Converted string:" << endl;
+	cout << str << endl;
+
+}
+
+void HighLevel()
+{
+    char string1[] = "qwertyh";
+    char string2[] = "qasdrty";
+    char string3[20];
+    for (int j = 0; j < sizeof(string3); j++)
+    {
+
+        for (int i = 0; i < sizeof(string1); i++)
+        {
+            char temp;
+            for (int k = 0; k < sizeof(string2); k++)
+            {
+                if (string1[i] != string2[k])
+                {
+                    temp = string1[i];
+                }
+                else
+                {
+                    temp = 0;
+                    break;
+                }
+            }
+            string3[j] = temp;
+            if (string3[j] != 0)
+            {
+                j++;
+                if (j >= sizeof(string3))
+                    break;
+            }
+        }
+    }
+    cout << string3 << endl;
+}
+
+int main()
+{
+	BasicLevel();
+	AverageLevel();
+	HighLevel();
+}
