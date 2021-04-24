@@ -1,0 +1,29 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main()
+{
+	const int N = 5;
+	ofstream f("f.txt");
+	cout << "Input numbers: " << endl;
+	int arr[N], arr2[N];
+	for (int i = 0; i < N; i++)
+	{
+		cin >> arr[i];
+		f << arr[i] << endl;
+	}
+	f.close();
+	ifstream fread("f.txt");
+	ofstream g("g.txt");
+	cout << "FILE F: " << endl;
+	for (int i = 0; i < N; i++)
+	{
+		fread >> arr2[i];
+		cout << arr2[i] << "\t";
+		g << (arr2[i] * arr2[i]) << "\t";
+	}
+	fread.close();
+	g.close();
+}
