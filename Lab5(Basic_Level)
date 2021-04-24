@@ -1,0 +1,266 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <ctime>
+#pragma warning(disable: 4996)
+using namespace std;
+
+string getRandomSex()
+{
+	string Sex[] = { "Man", "Woman" };
+	return Sex[rand() % 2];
+}
+
+string getRandomCountry()
+{
+	string Country[] = { "Ukraine", "Russia", "Germany", "Poland", "Hungary", "Belarus", "Slovenia", "Latvia" };
+	return Country[rand() % Country->size()];
+}
+
+string getRandomRegion()
+{
+	string Region[] = { "Odessa", "Poltava","Nikolaev","Kiev","Lviv","Zhytomyr" ,"Chernigiv" };
+	return Region[rand() % Region->size()];
+}
+
+string getRandomDistrict()
+{
+	string District[] = { "Zhmerinskiy", "Pavlogradskiy", "Kamenskiy", "Rakhiv", "Kosiv", "Berezovsky", "Podolsky" };
+	return District[rand() % 7];
+}
+
+string getRandomCity()
+{
+	string City[] = { "Odessa", "Poltava", "Nikolaev","Kiev","Lviv" ,"Zhytomyr" ,"Chernigiv" };
+	return City[rand() % City->size()];
+}
+
+string getRandomStreet()
+{
+	string Street[] = { "Academic", "Kamanina", "Levanevsky", "Posmitna", "Dobrovolsky", "Derebasivska", "Kanatna" };
+	return Street[rand() % 7];
+}
+
+struct Date
+{
+	short day;
+	short month;
+	short year;
+};
+
+struct Adress
+{
+	int Postcode;
+	string Country;
+	string Region;
+	string District;
+	string City;
+	string Street;
+	short House;
+	short Apartment;
+};
+
+struct Student
+{
+	string F;
+	string I;
+	string O;
+	string Sex;
+	string Nationality;
+	int Height;
+	int Weight;
+	Date birthday;
+	string Number;
+	Adress home_adress;
+	string University;
+	short Grade;
+	string Group;
+	float Average_mark;
+	string Specialty;
+	void readInfo();
+};
+
+void Student::readInfo()
+{
+	cout << endl << "F: " << F << endl;
+	cout << "I: " << I << endl;
+	cout << "O: " << O << endl;
+	cout << "Sex: " << Sex << endl;
+	cout << "Nationality: " << Nationality << endl;
+	cout << "Height: " << Height << endl;
+	cout << "Weight: " << Weight << endl;
+	cout << "Date of Birth: " << birthday.day << "." << birthday.month << "." << birthday.year << endl;
+	cout << "Number: " << Number << endl;
+	cout << "Home adress: " << home_adress.Postcode << ", " << home_adress.Country << ", " << home_adress.Region << " region, "
+		 << home_adress.District << " district, " << home_adress.City << ", " << home_adress.Street << " street, "
+		 << home_adress.House << ", " << home_adress.Apartment << endl;
+	cout << "University: " << University << endl;
+	cout << "Grade: " << Grade << endl;
+	cout << "Group: " << Group << endl;
+	cout << "Average mark: " << Average_mark << endl;
+	cout << "Specialty: " << Specialty << endl;
+	ofstream requiredStudent("RequiredStudent.txt", ofstream::app);
+	requiredStudent << F << endl;
+	requiredStudent << I << endl;
+	requiredStudent << O << endl;
+	requiredStudent << Sex << endl;
+	requiredStudent << Nationality << endl;
+	requiredStudent << Height << endl;
+	requiredStudent << Weight << endl;
+	requiredStudent << birthday.day << endl;
+	requiredStudent << birthday.month << endl;
+	requiredStudent << birthday.year << endl;
+	requiredStudent << Number << endl;
+	requiredStudent << home_adress.Postcode << endl;
+	requiredStudent << home_adress.Country << endl;
+	requiredStudent << home_adress.Region << endl;
+	requiredStudent << home_adress.District << endl;
+	requiredStudent << home_adress.City << endl;
+	requiredStudent << home_adress.Street << endl;
+	requiredStudent << home_adress.House << endl;
+	requiredStudent << home_adress.Apartment << endl;
+	requiredStudent << University << endl;
+	requiredStudent << Grade << endl;
+	requiredStudent << Group << endl;
+	requiredStudent << Average_mark << endl;
+	requiredStudent << Specialty << endl;
+}
+
+int main()
+{
+	srand(time(NULL));
+	int Count = 0;
+	ofstream student_info1("StudentInfo.txt");
+	cout << "Enter the number of students:";
+	cin >> Count;
+	getchar();
+	Student* mas = new Student[Count];
+	student_info1 << Count << endl;
+	for (char i = 0; i < Count; i++)
+	{
+		cout << "\nInput F: ";
+		getline(cin, mas[i].F, '\n');
+		student_info1 << mas[i].F << endl;
+
+		cout << "\nInput I: ";
+		getline(cin, mas[i].I, '\n');
+		student_info1 << mas[i].I << endl;
+
+		cout << "\nInput O: ";
+		getline(cin, mas[i].O, '\n');
+		student_info1 << mas[i].O << endl;
+
+		//Пол
+		mas[i].Sex = getRandomSex();
+		student_info1 << mas[i].Sex << endl;
+
+		cout << "\nInput Nationality: ";
+		getline(cin, mas[i].Nationality, '\n');
+		student_info1 << mas[i].Nationality << endl;
+
+		//Рост
+		mas[i].Height = rand() % 51 + 150;
+		student_info1 << mas[i].Height << endl;
+
+		//Вес
+		mas[i].Weight = rand() % 120 + 50;
+		student_info1 << mas[i].Weight << endl;
+
+		//День Рождения
+		mas[i].birthday.day = rand() % 31 + 1;
+		student_info1 << mas[i].birthday.day << endl;
+		mas[i].birthday.month = rand() % 12 + 1;
+		student_info1 << mas[i].birthday.month << endl;
+		mas[i].birthday.year = rand() % 30 + 1985;
+		student_info1 << mas[i].birthday.year << endl;
+
+		cout << "\nInput Phone Number: ";
+		getline(cin, mas[i].Number, '\n');
+		student_info1 << mas[i].Number << endl;
+
+		mas[i].home_adress.Postcode = rand() % 89999 + 10000;
+		student_info1 << mas[i].home_adress.Postcode << endl;
+		mas[i].home_adress.Country = getRandomCountry();
+		student_info1 << mas[i].home_adress.Country << endl;
+		mas[i].home_adress.Region = getRandomRegion();
+		student_info1 << mas[i].home_adress.Region << endl;
+		mas[i].home_adress.District = getRandomDistrict();
+		student_info1 << mas[i].home_adress.District << endl;
+		mas[i].home_adress.City = getRandomCity();
+		student_info1 << mas[i].home_adress.City << endl;
+		mas[i].home_adress.Street = getRandomStreet();
+		student_info1 << mas[i].home_adress.Street << endl;
+		mas[i].home_adress.House = rand() % 100 + 1;
+		student_info1 << mas[i].home_adress.House << endl;
+		mas[i].home_adress.Apartment = rand() % 55 + 1;
+		student_info1 << mas[i].home_adress.Apartment << endl;
+
+		cout << "\nInput University: ";
+		getline(cin, mas[i].University, '\n');
+		student_info1 << mas[i].University << endl;
+
+		//Курс
+		mas[i].Grade = rand() % 5 + 1;
+		student_info1 << mas[i].Grade << endl;
+
+		cout << "\nInput Your Group: ";
+		getline(cin, mas[i].Group, '\n');
+		student_info1 << mas[i].Group << endl;
+
+		//Средняя Оценка
+		mas[i].Average_mark = rand() % 100;
+		student_info1 << mas[i].Average_mark << endl;
+
+		cout << "\nInput Your Speciality: ";
+		getline(cin, mas[i].Specialty, '\n');
+		student_info1 << mas[i].Specialty << endl;
+
+	}
+	student_info1.close();
+	cout << "\n\n" << "Information about student that average mark less than 70" << endl;
+	ifstream student_info2("StudentInfo.txt");
+	student_info2 >> Count;
+	string temp;
+	getline(student_info2, temp);
+	Student* mas2 = new Student[Count];
+	for (size_t i = 0; i < Count; i++)
+	{
+		getline(student_info2, mas2[i].F);
+		getline(student_info2, mas2[i].I);
+		getline(student_info2, mas2[i].O);
+		getline(student_info2, mas2[i].Sex);
+		getline(student_info2, mas2[i].Nationality);
+		student_info2 >> mas2[i].Height;
+		student_info2 >> mas2[i].Weight;
+		getline(student_info2, temp);
+		student_info2 >> mas2[i].birthday.day;
+		student_info2 >> mas2[i].birthday.month;
+		student_info2 >> mas2[i].birthday.year;
+		getline(student_info2, temp);
+		student_info2 >> mas2[i].Number;
+		getline(student_info2, temp);
+		student_info2 >> mas2[i].home_adress.Postcode;
+		getline(student_info2, temp);
+		getline(student_info2, mas2[i].home_adress.Country);
+		getline(student_info2, mas2[i].home_adress.Region);
+		getline(student_info2, mas2[i].home_adress.District);
+		getline(student_info2, mas2[i].home_adress.City);
+		getline(student_info2, mas2[i].home_adress.Street);
+		student_info2 >> mas2[i].home_adress.House;
+		student_info2 >> mas2[i].home_adress.Apartment;
+		getline(student_info2, temp);
+		getline(student_info2, mas2[i].University);
+		student_info2 >> mas2[i].Grade;
+		getline(student_info2, temp);
+		getline(student_info2, mas2[i].Group);
+		student_info2 >> mas2[i].Average_mark;
+		getline(student_info2, temp);
+		getline(student_info2, mas2[i].Specialty);
+
+		if (mas2[i].Average_mark < 70)
+		{
+			mas2[i].readInfo();
+		}
+	}
+	student_info2.close();
+}
